@@ -28,19 +28,33 @@ const server = net.createServer(socket => {
     console.log(`ESP Server connected`);
     EServer = socket;
     
-    let buffer = ''; // Buffer to store incomplete data
-
+    let buffer = '';
+    let isHeadersComplete = false;
+    
     socket.on("data", (data) => {
         try {
-            buffer += data.toString();
+            const dataStr = data.toString();
             
-            // Try to find complete JSON objects
+            // If we haven't processed headers yet
+            if (!isHeadersComplete) {
+                const headerEnd = dataStr.indexOf('\r\n\r\n');
+                if (headerEnd !== -1) {
+                    // Found the end of headers, skip them
+                    buffer = dataStr.substring(headerEnd + 4);
+                    isHeadersComplete = true;
+                }
+                return;
+            }
+            
+            buffer += dataStr;
+            
+            // Process complete JSON objects
             let newlineIndex;
             while ((newlineIndex = buffer.indexOf('\n')) !== -1) {
                 let jsonString = buffer.substring(0, newlineIndex).trim();
                 buffer = buffer.substring(newlineIndex + 1);
                 
-                if (jsonString) {  // Only process non-empty strings
+                if (jsonString && !jsonString.startsWith('Host:')) {
                     try {
                         let parsedData = JSON.parse(jsonString);
                         console.log("ESP32:", parsedData);
