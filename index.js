@@ -2,20 +2,20 @@ import express from "express";
 import net from 'node:net';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import cors from 'cors';  
+import cors from 'cors';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
-const PORT = process.env.PORT || 8080;  
+const PORT = process.env.PORT || 8080;
 const EPORT = process.env.EPORT || 8000;
 let EServer = null;
 let EClient = null;
 
 // Add CORS support
 app.use(cors({
-    origin: '*',  
+    origin: '*',
     methods: ['GET', 'POST'],
     allowedHeaders: ['Content-Type']
 }));
@@ -28,36 +28,41 @@ app.use(express.static(path.join(__dirname, 'public')));
 const server = net.createServer(socket => {
     console.log(`ESP Server connected`);
     EServer = socket;
-    
+
     socket.setKeepAlive(true, 60000); // Keep connection alive
-    socket.setTimeout(300000); // 5 minute timeout
-    
+    socket.setTimeout(300000); // 5-minute timeout
+
     socket.on("data", (data) => {
         try {
-            let message = data.toString().trim();
-            console.log("ESP32:", message);
-            
-            // Validate JSON before forwarding
-            JSON.parse(message); // This will throw if invalid JSON
-            
-            if (EClient && !EClient.destroyed) {
-                EClient.write(`data: ${message}\n\n`);
+            const message = data.toString().trim();
+            console.log("ESP32 Raw Data:", message);
+
+            // Validate if the incoming data is valid JSON
+            if (isJson(message)) {
+                console.log("ESP32 JSON Data:", message);
+
+                // Forward the valid JSON to the client
+                if (EClient && !EClient.destroyed) {
+                    EClient.write(`data: ${message}\n\n`);
+                }
+            } else {
+                console.warn("Invalid JSON received from ESP32:", message);
             }
         } catch (error) {
             console.error("Error processing ESP32 data:", error);
         }
     });
-    
+
     socket.on("end", () => {
         console.log("ESP32 disconnected");
         EServer = null;
     });
-    
+
     socket.on("error", (err) => {
         console.error("Socket error:", err.message);
         EServer = null;
     });
-    
+
     socket.on("timeout", () => {
         console.log("Socket timeout");
         socket.end();
@@ -74,13 +79,15 @@ server.listen(EPORT, '0.0.0.0', () => {
     console.log(`Server for ESP32 listening on port ${EPORT}`);
 });
 
-// Add basic security headers
-app.use((req, res, next) => {
-    res.setHeader('X-Content-Type-Options', 'nosniff');
-    res.setHeader('X-Frame-Options', 'DENY');
-    res.setHeader('X-XSS-Protection', '1; mode=block');
-    next();
-});
+// Function to validate JSON
+function isJson(str) {
+    try {
+        JSON.parse(str);
+        return true;
+    } catch (e) {
+        return false;
+    }
+}
 
 app.get('/', (req, res) => {
     res.render("index");
@@ -88,20 +95,19 @@ app.get('/', (req, res) => {
 
 app.post("/send", (req, res) => {
     try {
-        let command = req.body;
-        command = JSON.stringify(command);
+        const command = JSON.stringify(req.body);
         console.log("Received command:", command);
-        
+
         if (!EServer || EServer.destroyed) {
             return res.status(503).json({ message: "ESP32 is not connected" });
         }
-        
+
         EServer.write(command + '\n', (err) => {
             if (err) {
                 console.error("Error sending command:", err);
                 return res.status(500).json({ message: "Failed to send command", error: err.message });
             }
-            res.status(200).json({message: "Command sent successfully" });
+            res.status(200).json({ message: "Command sent successfully" });
         });
     } catch (error) {
         console.error("Error in /send endpoint:", error);
@@ -114,42 +120,31 @@ app.get('/events', (req, res) => {
         res.setHeader('Content-Type', 'text/event-stream');
         res.setHeader('Cache-Control', 'no-cache');
         res.setHeader('Connection', 'keep-alive');
-        
-        // Clean up any existing client
+
         if (EClient && !EClient.destroyed) {
             EClient.end();
         }
-        
+
         EClient = res;
-        
+
         req.on('close', () => {
             if (EClient === res) {
                 EClient = null;
             }
         });
-        
-        // Send initial connection success message
+
         res.write('data: {"status":"connected"}\n\n');
-        
     } catch (error) {
         console.error("Error in /events endpoint:", error);
         res.status(500).json({ message: "Internal server error" });
     }
 });
 
-// Global error handler
-app.use((err, req, res, next) => {
-    console.error('Unhandled error:', err);
-    res.status(500).json({ message: "Internal server error" });
-});
-
 app.listen(PORT, '0.0.0.0', () => {
     console.log(`Web server listening on port ${PORT}`);
 });
 
-// Handle process termination
 process.on('SIGTERM', () => {
     console.log('SIGTERM received. Closing servers...');
     server.close(() => console.log('TCP server closed'));
-    app.close(() => console.log('HTTP server closed'));
 });
