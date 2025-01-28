@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smartix</title>
+    <link rel="shortcut icon" href="https://see.fontimg.com/api/rf5/8MVEg/M2U3MzBkMzg2MzVlNGI5MWFiYWM5YWZkZDNjYzE3YTMudHRm/Uw/pumpkin-type-halloween.png?r=fs&h=98&w=1500&fg=FEFAFA&bg=FFFFFF&tb=1&s=65" type="image/x-icon">
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300..700;1,300..700&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+      :root {
+            --primary-color: #FF6500;
+            --secondary-color: #202327;
+            --bg-color:  rgb(3, 3, 3);
+            --border-color: rgb(11, 11, 11);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            color: var(--primary-color);
+            font-family: "Raleway", serif;
+            font-weight: 400;
+            user-select: none;
+        }
+
+        html,
+        body {
+            background-color: var(--border-color);
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: 80% 20%;
+            grid-template-rows: 100%;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        .main {
+            display: grid;
+            grid-template-rows: 41% 20% 39%;
+        }
+
+        #data {
+            display: grid;
+            grid-template-rows: 25% 25% 25% 25%;
+        }
+
+        .main>div,
+
+        .submain {
+            border: 10px solid var(--border-color);
+
+        }
+
+        .con {
+            width: 100%;
+            height: 100%;
+            border-radius: 15px;
+            background-color: var(--bg-color);
+        }
+
+        .datumCon {
+            border: 5px solid var(--border-color);
+            background-color: var(--border-color);
+        }
+
+        .datumCon-c {
+            border-radius: 15px;
+            width: 100%;
+            height: 100%;
+            padding: 10px;
+            background-color: var(--bg-color);
+            display: grid;
+            grid-template-columns: 40% 60%;
+            gap: 10px;
+            grid-auto-rows: 60% 40%;
+        }
+
+        .datumCon-c .one {
+            grid-row-start: 1;
+            grid-row-end: 3;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+        }
+
+        .datumCon-c .two {
+            grid-column: 2;
+            grid-row: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .datumCon-c .three {
+            grid-column: 2;
+            grid-row: 2;
+        }
+
+        .two p {
+            font-size: 30px;
+            margin: 0 auto;
+            text-align: center;
+
+        }
+
+        .three p {
+            text-align: center;
+        }
+
+        #switches {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            /* padding: 10px; */
+            background-color: var(--border-color);
+        }
+
+        .switch {
+            background-color: var(--secondary-color);
+            border-radius: 15px;
+            width: 100%;
+            height: 100%;
+            padding: 10px;
+            cursor: pointer;
+            display: grid;
+            place-items: center;
+        }
+
+        .switch:hover {
+            background-color: var(--bg-color);
+            color: var(--primary-color);
+        }
+
+        .switch p {
+            font-size: 20px;
+        }
+        .switchActive {
+            background-color: var(--bg-color);
+        }
+
+        .switchActive p {
+            color: var(--primary-color);
+
+        }
+
+        .switch input {
+            display: none;
+        }
+
+        #ranges {
+
+            width: 100%;
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+
+            /* Adjust height as needed */
+        }
+
+        /* Ranges */
+        input[type="range"] {
+            -webkit-appearance: none;
+            appearance: none;
+            display: block;
+            width: 100%;
+            height: 5px;
+
+            outline: none;
+            overflow: hidden;
+        }
+
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: var(--secondary-color);
+            cursor: pointer;
+            box-shadow: -407px 0 0 400px var(--primary-color)
+        }
+
+        .rangeCon1 {
+            height: 100%;
+            width: 20%;
+            min-width: 110px;
+            display: grid;
+            place-items: center;
+        }
+
+        .rangeCon2 {
+            height: 100%;
+            width: 100%;
+            display: flex;
+            flex-direction: column-reverse;
+            align-items: center;
+        }
+
+        .rangeCon3 {
+            height: 100%;
+            flex-basis: 70%;
+            width: 70%;
+            display: grid;
+            place-items: center;
+            grid-template-rows: 45% 10% 45%;
+            transform: rotate(270deg);
+
+        }
+
+        .left-range-con,
+        .right-range-con {
+            height: 100%;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .rrc,
+        .lrc {
+            height: 100%;
+            width: 1px;
+            background-color: rgba(11, 11, 11, 0.524);
+
+        }
+
+        .range-level-indicator,
+        .range-type-indicator {
+            height: 15%;
+            flex-basis: 15%;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transform-origin: center;
+
+        }
+
+        .range-level-indicator p {
+            font-size: 23px;
+            padding: 0px 5px;
+            text-align: center;
+        }
+
+
+
+        .range-type-indicator p {
+            font-size: 18px;
+            margin: 0;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        .circular-range {
+            position: relative;
+            height: 200px;
+            width: 200px;
+        }
+
+        .crange {
+            position: absolute;
+
+            left: 0;
+            height: 200px;
+            width: 200px;
+        }
+
+        #c1 {
+            border-radius: 50%;
+            background-color: var(--bg-color);
+        }
+
+        #c2 {
+            /* border-radius: 50%; */
+            background-color: var(--primary-color);
+            bottom: 0;
+            left: 0;
+            height: 20%;
+            z-index: 99;
+        }
+
+        #c3 {
+            z-index: 100;
+            background-color: var(--bg-color);
+            height: 201px;
+            width: 201px;
+            -webkit-mask: radial-gradient(circle, transparent 100px, var(--bg-color) 100px);
+            mask: radial-gradient(circle, transparent 100px, var(--bg-color) 100px);
+        }
+
+        #c4 {
+            z-index: 101;
+            display: grid;
+            place-items: center;
+        }
+
+        #c4 p {
+            font-size: 40px;
+            color: rgb(255, 255, 255);
+        }
+
+        .main-con {
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+            height: 100%;
+            width: 100%;
+            padding: 10px 0px;
+        }
+
+        .welcome h1, .welcome h3 {
+            font-family: "Cormorant", serif;
+            font-weight: 400;
+            font-style: normal;
+        }
+        
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="main">
+            <div class="con">
+                <div class="main-con">
+                    <div class="welcome">
+                        <h1 style="margin-bottom: 10px;font-size: 32px;">HI, MANDY!</h1>
+                        <h3 style="font-size: 26px;">WELCOME TO YOUR DASHBOARD</h3>
+                    </div>
+
+
+
+                    <div class="circular-range">
+                        <div class="crange" id="c1"></div>
+                        <div class="crange" id="c2"></div>
+                        <div class="crange" id="c3"></div>
+                        <div class="crange" id="c4">
+                            <p>20%</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="con" id="switches">
+                    <div class="switch-con">
+                        <div class="switch">
+                            <input type="checkbox" data-check-type="Television" class="check" name="television"
+                                id="television">
+                            <p>Television</p>
+                        </div>
+                    </div>
+
+                    <div class="switch-con">
+                        <div class="switch">
+                            <input type="checkbox" data-check-type="Lights" class="check" name="lights" id="lights">
+                            <p>Lights</p>
+                        </div>
+                    </div>
+
+                    <div class="switch-con">
+                        <div class="switch">
+                            <input type="checkbox" data-check-type="Air Conditioner" class="check"
+                                name="air-conditioner" id="air-conditioner">
+                            <p>Air-conditioner</p>
+                        </div>
+                    </div>
+
+                    <div class="switch-con">
+                        <div class="switch">
+                            <input type="checkbox" data-check-type="Refridgerator" class="check" name="refridgerator"
+                                id="refridgerator">
+                            <p>Refridgerator</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="con" id="ranges">
+
+                    <div class="rangeCon1">
+                        <div class="rangeCon2">
+                            <div class="range-type-indicator">
+                                <p>Thermostat</p>
+                            </div>
+
+                            <div class="rangeCon3">
+
+                                <div class="left-range-con">
+                                    <div class="lrc"></div>
+                                    <div class="lrc"></div>
+                                    <div class="lrc"></div>
+                                    <div class="lrc"></div>
+                                    <div class="lrc"></div>
+                                </div>
+                                <input type="range" aria-label="Thermostat" name="thermostat" min="0" max="100"
+                                    value="100" class="range" data-range-type="Thermostat">
+
+                                <div class="right-range-con">
+                                    <div class="rrc"></div>
+                                    <div class="rrc"></div>
+                                    <div class="rrc"></div>
+                                    <div class="rrc"></div>
+                                    <div class="rrc"></div>
+                                </div>
+                            </div>
+                            <div class="range-level-indicator">
+                                <p>100</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rangeCon1">
+                        <div class="rangeCon2">
+                            <div class="range-type-indicator">
+                                <p>Blinds Position</p>
+                            </div>
+
+                            <div class="rangeCon3">
+
+                                <div class="left-range-con">
+                                    <div class="lrc"></div>
+                                    <div class="lrc"></div>
+                                    <div class="lrc"></div>
+                                    <div class="lrc"></div>
+                                    <div class="lrc"></div>
+                                </div>
+
+                                <input type="range" aria-label="Blinds Position" name="blinds-position" min="0"
+                                    max="100" value="100" class="range" data-range-type="Blinds Position">
+
+                                <div class="right-range-con">
+                                    <div class="rrc"></div>
+                                    <div class="rrc"></div>
+                                    <div class="rrc"></div>
+                                    <div class="rrc"></div>
+                                    <div class="rrc"></div>
+                                </div>
+                            </div>
+                            <div class="range-level-indicator">
+                                <p>100</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rangeCon1">
+                        <div class="rangeCon2">
+                            <div class="range-type-indicator">
+                                <p>Fan Speed</p>
+                            </div>
+
+                            <div class="rangeCon3">
+
+                                <div class="left-range-con">
+                                    <div class="lrc"></div>
+                                    <div class="lrc"></div>
+                                    <div class="lrc"></div>
+                                    <div class="lrc"></div>
+                                    <div class="lrc"></div>
+                                </div>
+                                <input type="range" aria-label="Fan Speed" name="fan-speed" min="0" max="100"
+                                    value="100" class="range" data-range-type="Fan Speed">
+
+                                <div class="right-range-con">
+                                    <div class="rrc"></div>
+                                    <div class="rrc"></div>
+                                    <div class="rrc"></div>
+                                    <div class="rrc"></div>
+                                    <div class="rrc"></div>
+                                </div>
+                            </div>
+                            <div class="range-level-indicator">
+                                <p>100</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rangeCon1">
+                        <div class="rangeCon2">
+                            <div class="range-type-indicator">
+                                <p>Speaker Volume</p>
+                            </div>
+
+                            <div class="rangeCon3">
+
+                                <div class="left-range-con">
+                                    <div class="lrc"></div>
+                                    <div class="lrc"></div>
+                                    <div class="lrc"></div>
+                                    <div class="lrc"></div>
+                                    <div class="lrc"></div>
+                                </div>
+                                <input type="range" aria-label="Speaker Volume" name="speaker-volume" min="0" max="100"
+                                    value="100" class="range" data-range-type="Speaker Volume">
+
+                                <div class="right-range-con">
+                                    <div class="rrc"></div>
+                                    <div class="rrc"></div>
+                                    <div class="rrc"></div>
+                                    <div class="rrc"></div>
+                                    <div class="rrc"></div>
+                                </div>
+                            </div>
+                            <div class="range-level-indicator">
+                                <p>100</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rangeCon1">
+                        <div class="rangeCon2">
+                            <div class="range-type-indicator">
+                                <p>Lighting Brightness</p>
+                            </div>
+
+                            <div class="rangeCon3">
+
+                                <div class="left-range-con">
+                                    <div class="lrc"></div>
+                                    <div class="lrc"></div>
+                                    <div class="lrc"></div>
+                                    <div class="lrc"></div>
+                                    <div class="lrc"></div>
+                                </div>
+                                <input type="range" aria-label="Lighting Brightness" name="lighting-brightness" min="0"
+                                    max="100" value="100" class="range" data-range-type="Lighting Brightness">
+
+                                <div class="right-range-con">
+                                    <div class="rrc"></div>
+                                    <div class="rrc"></div>
+                                    <div class="rrc"></div>
+                                    <div class="rrc"></div>
+                                    <div class="rrc"></div>
+                                </div>
+                            </div>
+                            <div class="range-level-indicator">
+                                <p>100</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+        <div class="submain">
+            <div class="con" id="data">
+                <div class="datumCon">
+                    <div class="datumCon-c">
+                        <div class="one"><img src="/images/temperature.png" alt="" height="45px" width="45px"></div>
+                        <div class="two">
+                            <p class="datum-value">0</p>
+                        </div>
+                        <div class="three">
+                            <p>Temperature</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="datumCon">
+                    <div class="datumCon-c">
+                        <div class="one"><img src="/images/pressure.png" alt="" height="45px" width="45px"></div>
+                        <div class="two">
+                            <p class="datum-value">0</p>
+                        </div>
+                        <div class="three">
+                            <p>Pressure</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="datumCon">
+                    <div class="datumCon-c">
+                        <div class="one"><img src="/images/humidity.png" alt="" height="45px" width="45px"></div>
+                        <div class="two">
+                            <p class="datum-value">0</p>
+                        </div>
+                        <div class="three">
+                            <p>Humidity</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="datumCon">
+                    <div class="datumCon-c">
+                        <div class="one"><img src="/images/speed.png" alt="" height="45px" width="45px"></div>
+                        <div class="two">
+                            <p class="datum-value">0</p>
+                        </div>
+                        <div class="three">
+                            <p>Wind Speed</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+
+
+
+<script>
+    const eventSource = new EventSource('/events');
+    const datumValues = document.querySelectorAll('.datum-value');
+    const waterLevel = document.querySelector("#c4 p");
+    const waterLevels = document.querySelector("#c2");
+
+    eventSource.onmessage = (event) => {
+        let data = JSON.parse(event.data);
+        if (data.waterLevel !== undefined) {
+            waterLevel.textContent = `${data.waterLevel}%`;
+            waterLevels.style.height = `${Math.round(data.waterLevel)}%`;
+        }
+        if (data.temperature !== undefined) {
+            datumValues[0].textContent = data.temperature;
+        }
+
+        if (data.pressure !== undefined) {
+            datumValues[1].textContent = data.pressure;
+        }
+
+        if (data.humidity !== undefined) {
+            datumValues[2].textContent = data.humidity;
+        }
+
+        if (data.windSpeed !== undefined) {
+            datumValues[3].textContent = data.windSpeed;
+        }
+    }
+    document.querySelectorAll('.check').forEach(elem => {
+        elem.addEventListener('input', (e) => {
+            //console.log(`Checkbox ${e.target.name} is now ${e.target.checked ? 'checked' : 'unchecked'}`);
+            let checkValue = event.target.checked ? 'On' : 'Off';
+            let checkType = event.target.dataset.checkType;
+            let command = { [checkType]: checkValue };
+            fetch('/send', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ command }),
+            })
+                .then((resp) => resp.json())
+                .then((data) => {
+                    console.log(data);
+                })
+                .catch((error) => {
+                    console.log(error.message);
+                });
+        });
+    });
+
+    document.querySelectorAll('.switch').forEach(switchElement => {
+        switchElement.addEventListener('click', () => {
+            const checkbox = switchElement.querySelector('input[type="checkbox"]');
+            checkbox.checked = !checkbox.checked;
+            switchElement.classList.toggle('switchActive', checkbox.checked);
+
+            const event = new Event('input', { bubbles: true });
+            checkbox.dispatchEvent(event);
+        });
+    });
+
+    let ranges = document.querySelectorAll('.range');
+
+    ranges.forEach((range) => {
+        range.addEventListener('input', (event) => {
+            let rangeValue = event.target.value;
+            let rangeType = event.target.dataset.rangeType;
+            console.log(rangeType);
+
+            let command = { [rangeType]: rangeValue };
+
+            fetch('/send', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ command }),
+            })
+                .then((resp) => resp.json())
+                .then((data) => {
+                    console.log(data);
+                })
+                .catch((error) => {
+                    console.log(error.message);
+                });
+
+            const rangeCon2 = range.closest('.rangeCon2');
+            const levelIndicator = rangeCon2.querySelector('.range-level-indicator p');
+
+            if (levelIndicator) {
+                levelIndicator.textContent = rangeValue;
+            }
+        });
+    });
+
+</script>
+
+</html>
