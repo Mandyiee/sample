@@ -16,7 +16,7 @@ let EClient = null;
 // Add CORS support
 app.use(cors({
     origin: '*',
-    methods: ['GET', 'POST'],
+    methods: ['GET', 'POST', 'HEAD'],
     allowedHeaders: ['Content-Type']
 }));
 
@@ -37,7 +37,7 @@ const server = net.createServer(socket => {
             const message = data.toString().trim();
             console.log("ESP32 Raw Data:", message);
 
-            // Validate if the incoming data is valid JSON
+            
             if (isJson(message)) {
                 console.log("ESP32 JSON Data:", message);
 
