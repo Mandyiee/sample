@@ -96,7 +96,7 @@ app.get('/', (req, res) => {
 app.post("/send", (req, res) => {
     try {
         const command = JSON.stringify(req.body);
-        console.log("Received command:", command);
+        console.log("Sending command:", command);
 
         if (!EServer || EServer.destroyed) {
             return res.status(503).json({ message: "ESP32 is not connected" });
