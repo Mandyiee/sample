@@ -707,8 +707,7 @@
 
 
             clipRect.setAttribute("height", height);
-            clipRect.setAttribute("y", 200 - height);
-            waterLevels.style.height = `${Math.round(height)}%`;
+            clipRect.setAttribute("y", 200 - height);;
         }
         if (data.temperature !== undefined) {
             datumValues[0].textContent = data.temperature;
