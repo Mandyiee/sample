@@ -5,13 +5,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Smartix</title>
-    <link rel="shortcut icon" href="https://see.fontimg.com/api/rf5/8MVEg/M2U3MzBkMzg2MzVlNGI5MWFiYWM5YWZkZDNjYzE3YTMudHRm/Uw/pumpkin-type-halloween.png?r=fs&h=98&w=1500&fg=FEFAFA&bg=FFFFFF&tb=1&s=65" type="image/x-icon">
+    <link rel="shortcut icon"
+        href="https://see.fontimg.com/api/rf5/8MVEg/M2U3MzBkMzg2MzVlNGI5MWFiYWM5YWZkZDNjYzE3YTMudHRm/Uw/pumpkin-type-halloween.png?r=fs&h=98&w=1500&fg=FEFAFA&bg=FFFFFF&tb=1&s=65"
+        type="image/x-icon">
     <style>
-      @import url('https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300..700;1,300..700&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
-      :root {
+        @import url('https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300..700;1,300..700&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+
+        :root {
             --primary-color: #FF6500;
             --secondary-color: #202327;
-            --bg-color:  rgb(3, 3, 3);
+            --bg-color: rgb(3, 3, 3);
             --border-color: rgb(11, 11, 11);
         }
 
@@ -49,10 +52,8 @@
         }
 
         .main>div,
-
         .submain {
             border: 10px solid var(--border-color);
-
         }
 
         .con {
@@ -106,7 +107,6 @@
             font-size: 30px;
             margin: 0 auto;
             text-align: center;
-
         }
 
         .three p {
@@ -117,7 +117,6 @@
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 10px;
-            /* padding: 10px; */
             background-color: var(--border-color);
         }
 
@@ -140,13 +139,13 @@
         .switch p {
             font-size: 20px;
         }
+
         .switchActive {
             background-color: var(--bg-color);
         }
 
         .switchActive p {
             color: var(--primary-color);
-
         }
 
         .switch input {
@@ -154,14 +153,11 @@
         }
 
         #ranges {
-
             width: 100%;
             height: 200px;
             display: flex;
             align-items: center;
             justify-content: space-evenly;
-
-            /* Adjust height as needed */
         }
 
         /* Ranges */
@@ -171,11 +167,9 @@
             display: block;
             width: 100%;
             height: 5px;
-
             outline: none;
             overflow: hidden;
         }
-
 
         input[type="range"]::-webkit-slider-thumb {
             -webkit-appearance: none;
@@ -212,7 +206,6 @@
             place-items: center;
             grid-template-rows: 45% 10% 45%;
             transform: rotate(270deg);
-
         }
 
         .left-range-con,
@@ -229,7 +222,6 @@
             height: 100%;
             width: 1px;
             background-color: rgba(11, 11, 11, 0.524);
-
         }
 
         .range-level-indicator,
@@ -241,7 +233,6 @@
             align-items: center;
             justify-content: center;
             transform-origin: center;
-
         }
 
         .range-level-indicator p {
@@ -249,8 +240,6 @@
             padding: 0px 5px;
             text-align: center;
         }
-
-
 
         .range-type-indicator p {
             font-size: 18px;
@@ -265,38 +254,15 @@
             width: 200px;
         }
 
-        .crange {
-            position: absolute;
+        
 
+       
+        #c4 {
+            position: absolute;
             left: 0;
+            top: 0;
             height: 200px;
             width: 200px;
-        }
-
-        #c1 {
-            border-radius: 50%;
-            background-color: var(--bg-color);
-        }
-
-        #c2 {
-            /* border-radius: 50%; */
-            background-color: var(--primary-color);
-            bottom: 0;
-            left: 0;
-            height: 20%;
-            z-index: 99;
-        }
-
-        #c3 {
-            z-index: 100;
-            background-color: var(--bg-color);
-            height: 201px;
-            width: 201px;
-            -webkit-mask: radial-gradient(circle, transparent 100px, var(--bg-color) 100px);
-            mask: radial-gradient(circle, transparent 100px, var(--bg-color) 100px);
-        }
-
-        #c4 {
             z-index: 101;
             display: grid;
             place-items: center;
@@ -316,13 +282,121 @@
             padding: 10px 0px;
         }
 
-        .welcome h1, .welcome h3 {
+        .welcome h1,
+        .welcome h3 {
             font-family: "Cormorant", serif;
             font-weight: 400;
             font-style: normal;
         }
-        
+
+        /* Media Queries for Responsiveness */
+        @media (max-width: 1200px) {
+            .container {
+                grid-template-columns: 75% 25%;
+                overflow: hidden;
+            }
+
+            #ranges {
+                height: 300px;
+                overflow-x: scroll;
+            }
+
+            .main {
+                grid-template-rows: 40% 25% 35%;
+            }
+
+            #switches {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 992px) {
+            .container {
+                grid-template-columns: 100%;
+                grid-template-rows: auto auto;
+                overflow-y: hidden;
+            }
+
+            .main {
+                grid-template-rows: 45% 25% 30%;
+            }
+
+            #switches {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .datumCon-c {
+                grid-template-columns: repeat(4, 1fr);
+                grid-template-rows: auto;
+            }
+
+            #ranges {
+                height: 300px;
+                overflow-x: scroll;
+                margin-bottom: 100px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 100%;
+                grid-template-rows: auto auto;
+                overflow-y: hidden;
+            }
+
+            .main {
+                grid-template-rows: 50% 25% 25%;
+            }
+
+            .datumCon-c {
+                grid-template-columns: repeat(4, 1fr);
+                grid-template-rows: auto;
+            }
+
+            #ranges {
+                height: 300px;
+                overflow-x: scroll;
+                margin-bottom: 100px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                grid-template-columns: 100%;
+                overflow-y: hidden;
+            }
+
+            .datumCon-c .one {
+                grid-row-start: 1;
+                grid-row-end: 2;
+            }
+
+            .datumCon-c .two {
+                grid-column: 1;
+                grid-row: 2;
+            }
+
+            .datumCon-c .three {
+                grid-column: 1;
+                grid-row: 3;
+            }
+
+            .switch p {
+                font-size: 16px;
+            }
+
+            .main-con {
+                flex-direction: column;
+            }
+
+            #ranges {
+                height: 300px;
+                overflow-x: scroll;
+                margin-bottom: 100px;
+            }
+        }
     </style>
+
 </head>
 
 <body>
@@ -338,12 +412,22 @@
 
 
                     <div class="circular-range">
-                        <div class="crange" id="c1"></div>
-                        <div class="crange" id="c2"></div>
-                        <div class="crange" id="c3"></div>
-                        <div class="crange" id="c4">
-                            <p>20%</p>
-                        </div>
+                        <svg width="200" height="200" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Define the clip path for the bottom part of the circle -->
+                            <defs>
+                              <clipPath id="bottomClip">
+                                <!-- Rectangle for clipping, height and y will be updated dynamically -->
+                                <rect id="clipRect" x="0" y="200" width="200" height="0" />
+                              </clipPath>
+                            </defs>
+                            <!-- Full circle outline -->
+                            <circle cx="100" cy="100" r="100" fill="none" stroke="black" stroke-width="0" />
+                            <!-- Circle with bottom fill, clipped by the rectangle -->
+                            <circle cx="100" cy="100" r="100" fill="#FF6500" clip-path="url(#bottomClip)" />
+                          </svg>
+                          <div id="c4">
+                            <p>50%</p>
+                          </div>
                     </div>
                 </div>
             </div>
@@ -600,16 +684,31 @@
 
 
 <script>
+    // let heights = (50/ 100) * 200;
+    // const clipRects = document.getElementById("clipRect");
+    // clipRects.setAttribute("height", heights);
+    // clipRects.setAttribute("y", 200 - heights);
     const eventSource = new EventSource('/events');
     const datumValues = document.querySelectorAll('.datum-value');
     const waterLevel = document.querySelector("#c4 p");
-    const waterLevels = document.querySelector("#c2");
+    const clipRect = document.getElementById("clipRect");
+
+    // const waterLevels = document.querySelector("#c2");
 
     eventSource.onmessage = (event) => {
         let data = JSON.parse(event.data);
+
+        console.log(data);
+
+
         if (data.waterLevel !== undefined) {
-            waterLevel.textContent = `${data.waterLevel}%`;
-            waterLevels.style.height = `${Math.round(data.waterLevel)}%`;
+            const height = parseInt(data.waterLevel, 10);
+            waterLevel.textContent = `${height}%`;
+
+
+            clipRect.setAttribute("height", height);
+            clipRect.setAttribute("y", 200 - height);
+            waterLevels.style.height = `${Math.round(height)}%`;
         }
         if (data.temperature !== undefined) {
             datumValues[0].textContent = data.temperature;
